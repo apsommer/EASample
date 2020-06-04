@@ -11,6 +11,6 @@ import retrofit2.http.Query;
  */
 public interface GerritApi {
 
-    @GET
+    @GET ("changes/")
     Call<List<Change>> loadChanges(@Query("q") String status);
 }
