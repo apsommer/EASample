@@ -1,9 +1,9 @@
 package com.sommerengineering.retrofit;
 
 /**
- * Simple POJO that represents a change in a subject text
+ * Simple POJO that Retrofit automatically creates from the API response.
  */
-public class Change {
+public class DataModel {
 
     private String subject;
 

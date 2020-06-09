@@ -13,23 +13,24 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity implements Callback<List<Change>> {
+public class ViewUI extends AppCompatActivity implements Callback<List<DataModel>> {
 
+    // constants
     final String BASE_URL = "https://git.eclipse.org/r/";
-    final String TAG = getClass().getSimpleName() + " ~~ ";
+    final String TAG = getClass().getSimpleName() + " ~~ "; // prefer this ~~ to easily filter logcat
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        // required by system, load a saved bundle if exists
+        // required by system, load a saved bundle if it exists
         super.onCreate(savedInstanceState);
 
-        // inflate the layout
+        // inflate the layout, creates the UI on the device from the passed XML
         setContentView(R.layout.activity_main);
 
         // converter between JSON <--> Java POJO
         Gson gson = new GsonBuilder()
-                .setLenient() // relax the conditions for what the parser considers valid JSON
+                .setLenient() // relax the conditions for what the parser considers valid JSON syntax
                 .create();
 
         // initialize retrofit with the JSON parser and base URL
@@ -38,24 +39,23 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Cha
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
-        // associate retrofit to the API interface
-        GerritApi gerritApi = retrofit.create(GerritApi.class);
-        Call<List<Change>> call = gerritApi.loadChanges("status:open");
+        // associate the API interface to the Retrofit object
+        ApiInterface gerritApi = retrofit.create(ApiInterface.class);
+        Call<List<DataModel>> call = gerritApi.loadChanges("status:open");
 
         // make the API the call asynchronously
         call.enqueue(this);
     }
 
+    // callback triggered on API response
     @Override
-    public void onResponse(Call<List<Change>> call, Response<List<Change>> response) {
+    public void onResponse(Call<List<DataModel>> call, Response<List<DataModel>> response) {
 
         // success
         if (response.isSuccessful()) {
 
-            // extract the list of changed text from the response
-            List<Change> changes = response.body();
-
             // todo
+            List<DataModel> changes = response.body();
             changes.forEach(change -> Log.e(TAG, change.getSubject()));
 
         // failure, the response finished but has an error
@@ -64,9 +64,9 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Cha
         }
     }
 
-    // failure, the response was not generated due to error
+    // failure, the response was interrupted by an error
     @Override
-    public void onFailure(Call<List<Change>> call, Throwable t) {
+    public void onFailure(Call<List<DataModel>> call, Throwable t) {
         t.printStackTrace();
     }
 }
