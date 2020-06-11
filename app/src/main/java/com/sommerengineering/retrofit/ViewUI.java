@@ -55,15 +55,19 @@ public class ViewUI extends AppCompatActivity implements Callback<DataModel> {
         // success
         if (response.isSuccessful()) {
 
-
+            // response body holds the converted POJO
             DataModel model = response.body();
             List<Location> locations = model.getLocations();
 
-            locations.forEach( location -> {
-                Log.d(TAG, location.getId());
-                Log.d(TAG, location.getName());
-                Log.d(TAG, location.getAddress());
-            });
+            // concatenate all data into a single string
+            String output = "";
+            for (Location location : locations) {
+                output += "\n" + location.getId() + "\n" + location.getName() + "\n" + location.getAddress() + "\n";
+            }
+
+            // display string in UI
+            TextView tv = findViewById(R.id.tv);
+            tv.setText(output);
 
         // failure, the response finished but has an error
         } else {
