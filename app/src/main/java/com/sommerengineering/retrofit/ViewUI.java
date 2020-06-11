@@ -3,6 +3,7 @@ package com.sommerengineering.retrofit;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -13,10 +14,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ViewUI extends AppCompatActivity implements Callback<List<DataModel>> {
+public class ViewUI extends AppCompatActivity implements Callback<DataModel> {
 
     // constants
-    final String BASE_URL = "https://git.eclipse.org/r/";
+    final String BASE_URL = "https://api-stage.greenlotstest.com/ocpi/cpo/2.1.1/";
     final String TAG = getClass().getSimpleName() + " ~~ "; // prefer this ~~ to easily filter logcat
 
     @Override
@@ -40,8 +41,8 @@ public class ViewUI extends AppCompatActivity implements Callback<List<DataModel
                 .build();
 
         // associate the API interface to the Retrofit object
-        ApiInterface gerritApi = retrofit.create(ApiInterface.class);
-        Call<List<DataModel>> call = gerritApi.loadChanges("status:open");
+        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+        Call<DataModel> call = apiInterface.getLocations("Token " + BuildConfig.TOKEN);
 
         // make the API the call asynchronously
         call.enqueue(this);
@@ -49,14 +50,20 @@ public class ViewUI extends AppCompatActivity implements Callback<List<DataModel
 
     // callback triggered on API response
     @Override
-    public void onResponse(Call<List<DataModel>> call, Response<List<DataModel>> response) {
+    public void onResponse(Call<DataModel> call, Response<DataModel> response) {
 
         // success
         if (response.isSuccessful()) {
 
-            // todo
-            List<DataModel> changes = response.body();
-            changes.forEach(change -> Log.e(TAG, change.getSubject()));
+
+            DataModel model = response.body();
+            List<Location> locations = model.getLocations();
+
+            locations.forEach( location -> {
+                Log.d(TAG, location.getId());
+                Log.d(TAG, location.getName());
+                Log.d(TAG, location.getAddress());
+            });
 
         // failure, the response finished but has an error
         } else {
@@ -66,7 +73,7 @@ public class ViewUI extends AppCompatActivity implements Callback<List<DataModel
 
     // failure, the response was interrupted by an error
     @Override
-    public void onFailure(Call<List<DataModel>> call, Throwable t) {
+    public void onFailure(Call<DataModel> call, Throwable t) {
         t.printStackTrace();
     }
 }
