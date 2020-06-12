@@ -1,4 +1,1 @@
-Simple Android app that implements the Retrofit library.
-
-https://square.github.io/retrofit/
-https://github.com/google/gson
+Android app that implements the [Retrofit](https://square.github.io/retrofit/) library using a [GSON](https://github.com/google/gson) serializer.
