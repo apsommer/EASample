@@ -1,7 +1,6 @@
 package com.sommerengineering.retrofit;
 
 import android.util.Log;
-import android.widget.TextView;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -23,10 +22,10 @@ public class Repository implements Callback<DataModel> {
     final String BASE_URL = "https://api-stage.greenlotstest.com/ocpi/cpo/2.1.1/";
 
     // livedata is an observable that automatically respects its observers' lifecycles
-    final MutableLiveData<List<Location>> mutableLiveData = new MutableLiveData<>();
+    MutableLiveData<List<Location>> mutableLiveData = new MutableLiveData<>();
 
     // viewmodel requests formatted POJO's
-    public MutableLiveData<List<Location>> requestDataModels() {
+    public MutableLiveData<List<Location>> requestLocations() {
 
         // converter between JSON <--> Java POJO
         Gson gson = new GsonBuilder()
