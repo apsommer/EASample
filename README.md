@@ -1,1 +1,1 @@
-Android app that implements the [Retrofit](https://square.github.io/retrofit/) library using a [GSON](https://github.com/google/gson) serializer.
+Android app that implements the [Retrofit](https://square.github.io/retrofit/) library using a [GSON](https://github.com/google/gson) serializer developed on branch "master". The project continues with a refactor to [MVVM](https://developer.android.com/jetpack/docs/guide) architecture tracked on branch "MVVM".
