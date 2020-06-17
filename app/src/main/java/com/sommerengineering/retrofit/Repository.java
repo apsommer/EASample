@@ -15,10 +15,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * Repository manages the network API calls and retrieval from db cache. It supplies data to the ViewModel via exposure
+ * of a LiveData observable.
+ */
 public class Repository implements Callback<DataModel> {
 
     // constants
-    final String TAG = getClass().getSimpleName() + " ~~ "; // prefer this ~~ to easily filter logcat
+    final String TAG = getClass().getSimpleName() + " ~~ ";
     final String BASE_URL = "https://api-stage.greenlotstest.com/ocpi/cpo/2.1.1/";
 
     // livedata is an observable that automatically respects its observers' lifecycles

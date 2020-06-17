@@ -1,12 +1,19 @@
 package com.sommerengineering.retrofit;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
+/**
+ * ViewModel requests data from the Repository and stores the result in an observable LiveData.
+ */
 public class ViewModelUI extends ViewModel {
+
+    final String TAG = getClass().getSimpleName() + " ~~ ";
 
     // reference to repo and livedata observable it contains
     private Repository repository;
@@ -19,6 +26,7 @@ public class ViewModelUI extends ViewModel {
 
     // called by the view to access observable in the repo (abstraction layer)
     public LiveData<List<Location>> getLocations() {
+
         if (mutableLiveData == null) {
             mutableLiveData = repository.requestLocations();
         }
