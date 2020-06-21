@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- top tag identifies start destination -->
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@+id/login_dest" >
+
+    <!-- login todo add class names-->
+    <fragment
+        android:id="@+id/login_dest"
+        android:label="Home"
+        tools:layout="@layout/login" >
+
+        <action
+            android:id="@+id/next_action"
+            app:destination="@id/map_dest" />
+    </fragment>
+
+    <!--map-->
+    <fragment
+        android:id="@+id/map_dest"
+        android:label="Home"
+        tools:layout="@layout/map" />
+</navigation>
