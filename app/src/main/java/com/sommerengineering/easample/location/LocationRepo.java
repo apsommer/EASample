@@ -53,7 +53,7 @@ public class LocationRepo implements Callback<Root> {
         // return the observable (empty until async call finishes)
         return mutableLiveData;
     }
-    
+
     // callback triggered on API response
     @Override
     public void onResponse(Call<Root> call, Response<Root> response) {

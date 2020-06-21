@@ -1,45 +1,59 @@
 package com.sommerengineering.easample.location;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import android.os.Bundle;
-import android.view.View;
 
-import com.sommerengineering.easample.databinding.LocationBinding;
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.sommerengineering.easample.R;
+import com.sommerengineering.easample.databinding.LocationsBinding;
 
 import java.util.List;
 
-/**
- * The View (activity/fragment) only interacts with the UI, it observes the LiveData observable that is instantiated
- * in the Repository and passed to the ViewModel.
- */
-public class LocationView extends AppCompatActivity {
+public class LocationFragment extends Fragment {
 
     final String TAG = getClass().getSimpleName() + " ~~ ";
+    private LocationViewModel viewModel;
+    private LocationsBinding binding;
 
-    private LocationBinding binding;
+    public static LocationFragment newInstance() {
+        return new LocationFragment();
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
-        // required by system, load a saved bundle if it exists
-        super.onCreate(savedInstanceState);
+    public View onCreateView(@NonNull LayoutInflater inflater,
+             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         // inflate the layout and get reference to auto-generated view binding class
-        binding = LocationBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
+        binding = LocationsBinding.inflate(getLayoutInflater());
+        View root = binding.getRoot();
+        // setContentView(view);
 
         // turn on progress wheel
         binding.progressBar.setVisibility(View.VISIBLE);
 
+        return inflater.inflate(R.layout.locations, container, false);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
         // viewmodel instance created only the very first time system calls onCreate
         // all other instances of activity (orientation change) receive this same viewmodel instance
-        LocationModel viewmodel = new ViewModelProvider(this).get(LocationModel.class);
+        viewModel = new ViewModelProvider(this).get(LocationViewModel.class);
 
         // observe the livedata observable to receive any changes to its data
-        viewmodel.getLocations().observe(this, new Observer<List<Location>>() {
+        // todo getActivity may return null?
+        viewModel.getLocations().observe(getActivity(), new Observer<List<Location>>() {
 
             // called if target livedata observable is non null
             @Override
@@ -59,4 +73,5 @@ public class LocationView extends AppCompatActivity {
             }
         });
     }
+
 }

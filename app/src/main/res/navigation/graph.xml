@@ -6,11 +6,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@+id/login_dest" >
 
-    <!-- location todo add class names-->
+    <!-- login is host fragment -->
     <fragment
         android:id="@+id/login_dest"
-        android:label="Home"
-        tools:layout="@layout/location" >
+        android:name="com.sommerengineering.easample.login.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/login" >
 
         <action
             android:id="@+id/next_action"
@@ -20,6 +21,10 @@
     <!--map-->
     <fragment
         android:id="@+id/map_dest"
+        android:name="com.sommerengineering.easample.map.MapFragment"
         android:label="Home"
         tools:layout="@layout/map" />
+
+    <!-- todo add location -->
+
 </navigation>

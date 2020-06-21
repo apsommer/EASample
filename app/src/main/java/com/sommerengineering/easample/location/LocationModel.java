@@ -1,35 +1,39 @@
 package com.sommerengineering.easample.location;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
-
-import com.sommerengineering.easample.location.Location;
-
+import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
- * ViewModel requests data from the Repository and stores the result in an observable LiveData.
+ * Simple POJO that Retrofit automatically creates from the API response.
  */
-public class LocationModel extends ViewModel {
+class Root {
 
-    final String TAG = getClass().getSimpleName() + " ~~ ";
+    // consider the locations endpoint at https://api-stage.greenlotstest.com/ocpi/cpo/2.1.1/locations
+    // the hierarchy of this POJO and the response JSON must match
+    // JSON fields can be omitted as long as the hierarchy is respected
 
-    // reference to repo and livedata observable it contains
-    private LocationRepo repository;
-    private MutableLiveData<List<Location>> mutableLiveData;
+    // retrofit maps the JSON array "data" to a Java List<> named "locations"
+    // the list holds Location objects, and we can continue with more and more POJO classes as needed
+    @SerializedName("data")
+    private List<Location> locations;
+    public List<Location> getLocations() { return locations;}
+    public void setLocations(List<Location> locations) { this.locations = locations; }
+}
 
-    // pass repo in constructor for dependency injection
-    public LocationModel() {
-        repository = new LocationRepo();
-    }
+class Location {
 
-    // called by the view to access observable in the repo (abstraction layer)
-    public LiveData<List<Location>> getLocations() {
+    // for this class the Java attribute names are the same as JSON keys, so no need for the @SerializedName annotation
+    // getters and setters of the same name as the attribute are required, strict naming convention
 
-        if (mutableLiveData == null) {
-            mutableLiveData = repository.requestLocations();
-        }
-        return mutableLiveData;
-    }
+    private String id;
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
+
+    private String name;
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    private String address;
+    public String getAddress() { return address; }
+    public void setAddress(String address) { this.address = address; }
 }
