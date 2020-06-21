@@ -1,4 +1,4 @@
-package com.sommerengineering.retrofit;
+package com.sommerengineering.sample;
 
 import com.google.gson.annotations.SerializedName;
 import java.util.List;

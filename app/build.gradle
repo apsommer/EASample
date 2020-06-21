@@ -13,7 +13,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.sommerengineering.retrofit"
+        applicationId "com.sommerengineering.sample"
         minSdkVersion 24 // 24 for this sample app
         targetSdkVersion 29
         versionCode 1

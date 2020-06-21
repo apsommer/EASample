@@ -1,6 +1,4 @@
-package com.sommerengineering.retrofit;
-
-import android.util.Log;
+package com.sommerengineering.sample;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

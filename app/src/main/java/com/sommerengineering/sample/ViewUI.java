@@ -1,14 +1,13 @@
-package com.sommerengineering.retrofit;
+package com.sommerengineering.sample;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
-import com.sommerengineering.retrofit.databinding.ViewUiBinding;
+import com.sommerengineering.sample.databinding.ViewUiBinding;
 
 import java.util.List;
 
@@ -43,6 +42,7 @@ public class ViewUI extends AppCompatActivity {
         // observe the livedata observable to receive any changes to its data
         viewmodel.getLocations().observe(this, new Observer<List<Location>>() {
 
+            // called if target livedata observable is non null
             @Override
             public void onChanged(List<Location> locations) {
 

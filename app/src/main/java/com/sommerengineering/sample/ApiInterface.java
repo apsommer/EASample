@@ -1,4 +1,4 @@
-package com.sommerengineering.retrofit;
+package com.sommerengineering.sample;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

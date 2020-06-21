@@ -1,4 +1,4 @@
-package com.sommerengineering.retrofit;
+package com.sommerengineering.sample;
 
 import org.junit.Test;
 

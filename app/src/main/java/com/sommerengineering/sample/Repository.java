@@ -1,4 +1,4 @@
-package com.sommerengineering.retrofit;
+package com.sommerengineering.sample;
 
 import android.util.Log;
 
@@ -30,6 +30,9 @@ public class Repository implements Callback<DataModel> {
 
     // viewmodel requests formatted POJO's
     public MutableLiveData<List<Location>> requestLocations() {
+
+        // todo look in cache
+
 
         // converter between JSON <--> Java POJO
         Gson gson = new GsonBuilder()

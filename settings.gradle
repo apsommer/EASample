@@ -1,2 +1,2 @@
-rootProject.name='Retrofit'
+rootProject.name='Sample'
 include ':app'
