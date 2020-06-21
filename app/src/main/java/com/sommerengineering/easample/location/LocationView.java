@@ -1,13 +1,12 @@
-package com.sommerengineering.sample;
+package com.sommerengineering.easample.location;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
 import android.view.View;
 
-import com.sommerengineering.sample.databinding.ViewUiBinding;
+import com.sommerengineering.easample.databinding.LocationBinding;
 
 import java.util.List;
 
@@ -15,11 +14,11 @@ import java.util.List;
  * The View (activity/fragment) only interacts with the UI, it observes the LiveData observable that is instantiated
  * in the Repository and passed to the ViewModel.
  */
-public class ViewUI extends AppCompatActivity {
+public class LocationView extends AppCompatActivity {
 
     final String TAG = getClass().getSimpleName() + " ~~ ";
 
-    private ViewUiBinding binding;
+    private LocationBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +27,7 @@ public class ViewUI extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // inflate the layout and get reference to auto-generated view binding class
-        binding = ViewUiBinding.inflate(getLayoutInflater());
+        binding = LocationBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
@@ -37,7 +36,7 @@ public class ViewUI extends AppCompatActivity {
 
         // viewmodel instance created only the very first time system calls onCreate
         // all other instances of activity (orientation change) receive this same viewmodel instance
-        ViewModelUI viewmodel = new ViewModelProvider(this).get(ViewModelUI.class);
+        LocationModel viewmodel = new ViewModelProvider(this).get(LocationModel.class);
 
         // observe the livedata observable to receive any changes to its data
         viewmodel.getLocations().observe(this, new Observer<List<Location>>() {

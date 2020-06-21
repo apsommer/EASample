@@ -1,4 +1,4 @@
-package com.sommerengineering.sample;
+package com.sommerengineering.easample.location;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -8,8 +8,8 @@ import retrofit2.http.Header;
  * Simple interface definition that represents the relative portion of the API endpoint. The base URL is used when
  * instantiating the Retrofit object.
  */
-public interface ApiInterface {
+public interface LocationRetrofit {
 
     @GET ("locations")
-    Call<DataModel> getLocations(@Header("Authorization") String token);
+    Call<Root> getLocations(@Header("Authorization") String token);
 }

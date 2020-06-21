@@ -6,11 +6,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@+id/login_dest" >
 
-    <!-- login todo add class names-->
+    <!-- location todo add class names-->
     <fragment
         android:id="@+id/login_dest"
         android:label="Home"
-        tools:layout="@layout/login" >
+        tools:layout="@layout/location" >
 
         <action
             android:id="@+id/next_action"

@@ -1,4 +1,4 @@
-package com.sommerengineering.sample;
+package com.sommerengineering.easample;
 
 import android.content.Context;
 

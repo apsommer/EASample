@@ -1,4 +1,4 @@
-package com.sommerengineering.sample;
+package com.sommerengineering.easample.location;
 
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Simple POJO that Retrofit automatically creates from the API response.
  */
-class DataModel {
+class Root {
 
     // consider the locations endpoint at https://api-stage.greenlotstest.com/ocpi/cpo/2.1.1/locations
     // the hierarchy of this POJO and the response JSON must match
