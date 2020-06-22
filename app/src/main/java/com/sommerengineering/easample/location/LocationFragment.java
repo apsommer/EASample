@@ -36,12 +36,10 @@ public class LocationFragment extends Fragment {
         // inflate the layout and get reference to auto-generated view binding class
         binding = LocationBinding.inflate(getLayoutInflater());
         View root = binding.getRoot();
-        // setContentView(view);
 
         // turn on progress wheel
         binding.progressBar.setVisibility(View.VISIBLE);
-
-        return inflater.inflate(R.layout.location, container, false);
+        return root;
     }
 
     @Override
@@ -59,10 +57,7 @@ public class LocationFragment extends Fragment {
             @Override
             public void onChanged(List<Location> locations) {
 
-                if (locations == null) {
-                    Log.e(TAG, "locations null");
-                    return;
-                }
+                Log.d(TAG, "onChanged");
 
                 // turn off the progress wheel
                 binding.progressBar.setVisibility(View.INVISIBLE);

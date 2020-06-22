@@ -10,6 +10,6 @@ import retrofit2.http.Header;
  */
 public interface LocationRetrofit {
 
-    @GET ("location")
+    @GET ("locations")
     Call<Root> getLocations(@Header("Authorization") String token);
 }

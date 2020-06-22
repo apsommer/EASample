@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sommerengineering.easample.BuildConfig;
+
+import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -69,13 +71,17 @@ public class LocationRepo implements Callback<Root> {
 
         // failure, the response finished but has an error
         } else {
-            Log.e(TAG, response.errorBody().toString());
+            try {
+                Log.e(TAG, "onResponse > " + response.errorBody().string());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     // failure, the response was interrupted by an error
     @Override
     public void onFailure(Call<Root> call, Throwable t) {
-        Log.e(TAG, t.getMessage());
+        Log.e(TAG, "onFailure > " + t.getMessage());
     }
 }
