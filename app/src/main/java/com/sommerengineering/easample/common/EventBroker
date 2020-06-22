@@ -1,0 +1,37 @@
+class EventBroker {
+
+    // pattern 1
+
+    public LiveData getChargers(Location location) {
+        return new LiveData(charge endpoint ...)
+    }
+
+    // pattern 2
+
+    BroadcastReciever receiver;
+    receiver.onReceive("getCharger") {
+
+        Broadcast broadcast;
+        broadcast.toComponent("chargerObject")
+    }
+
+}
+
+class Component {
+
+    // pattern 1
+
+    private LiveData chargers = EventBroker.getCharger("San Diego")
+    // do something with charger object in the component
+
+    // pattern 2
+
+    Broadcast broadcast;
+    broadcast.toEventBroker("getCharger")
+
+    BroadcastReciever receiver;
+    receiver.onReceive("chargerObject") {
+
+        // do something with charger object in the component
+    }
+}

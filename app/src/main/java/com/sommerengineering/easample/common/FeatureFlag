@@ -1,0 +1,5 @@
+class FeatureFlag {
+
+    // definition of feature interface and protocol/contract
+    // state machine type methods determine app level feature set
+}

@@ -31,8 +31,8 @@ public class LocationRepo implements Callback<Root> {
     // viewmodel requests formatted POJO's
     public MutableLiveData<List<Location>> requestLocations() {
 
-        // todo look in cache
-
+        // todo logic to initialize observable with data from db cache
+        //  afterward initialization update cache in background if needed
 
         // converter between JSON <--> Java POJO
         Gson gson = new GsonBuilder()
