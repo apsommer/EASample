@@ -31,11 +31,9 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-
         // inflate the layout and get reference to auto-generated view binding class
         binding = LoginBinding.inflate(getLayoutInflater());
         View root = binding.getRoot();
-        // setContentView(view);
 
         // set button click listener
         Button button = binding.login;

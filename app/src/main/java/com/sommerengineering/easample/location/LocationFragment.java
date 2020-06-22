@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,6 +40,10 @@ public class LocationFragment extends Fragment {
 
         // turn on progress wheel
         binding.progressBar.setVisibility(View.VISIBLE);
+
+        // next button navigates to map destination
+        binding.nextButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.map_action));
+
         return root;
     }
 
@@ -56,8 +61,6 @@ public class LocationFragment extends Fragment {
             // called if target livedata observable is non null
             @Override
             public void onChanged(List<Location> locations) {
-
-                Log.d(TAG, "onChanged");
 
                 // turn off the progress wheel
                 binding.progressBar.setVisibility(View.INVISIBLE);
