@@ -64,7 +64,7 @@ public class LocationRepo implements Callback<Root> {
             // response body holds the converted POJO
             Root model = response.body();
 
-            // assign the list of locations to the observable
+            // assign the list of location to the observable
             mutableLiveData.setValue(model.getLocations());
 
         // failure, the response finished but has an error

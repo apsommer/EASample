@@ -14,17 +14,31 @@
         tools:layout="@layout/login" >
 
         <action
-            android:id="@+id/next_action"
+            android:id="@+id/map_action"
             app:destination="@id/map_dest" />
+
+        <action
+            android:id="@+id/location_action"
+            app:destination="@id/location_dest" />
     </fragment>
 
-    <!--map-->
+    <!-- map -->
     <fragment
         android:id="@+id/map_dest"
         android:name="com.sommerengineering.easample.map.MapFragment"
         android:label="Home"
         tools:layout="@layout/map" />
 
-    <!-- todo add location -->
+    <!-- location -->
+    <fragment
+        android:id="@+id/location_dest"
+        android:name="com.sommerengineering.easample.location.LocationFragment"
+        android:label="Location"
+        tools:layout="@layout/location" >
+
+        <action
+            android:id="@id/map_action"
+            app:destination="@id/map_dest" />
+    </fragment>
 
 </navigation>

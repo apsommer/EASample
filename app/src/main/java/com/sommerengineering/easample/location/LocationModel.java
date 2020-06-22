@@ -8,11 +8,11 @@ import java.util.List;
  */
 class Root {
 
-    // consider the locations endpoint at https://api-stage.greenlotstest.com/ocpi/cpo/2.1.1/locations
+    // consider the location endpoint at https://api-stage.greenlotstest.com/ocpi/cpo/2.1.1/locations
     // the hierarchy of this POJO and the response JSON must match
     // JSON fields can be omitted as long as the hierarchy is respected
 
-    // retrofit maps the JSON array "data" to a Java List<> named "locations"
+    // retrofit maps the JSON array "data" to a Java List<> named "location"
     // the list holds Location objects, and we can continue with more and more POJO classes as needed
     @SerializedName("data")
     private List<Location> locations;

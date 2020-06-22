@@ -9,12 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.sommerengineering.easample.R;
-import com.sommerengineering.easample.databinding.LocationsBinding;
+import com.sommerengineering.easample.databinding.LocationBinding;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class LocationFragment extends Fragment {
 
     final String TAG = getClass().getSimpleName() + " ~~ ";
     private LocationViewModel viewModel;
-    private LocationsBinding binding;
+    private LocationBinding binding;
 
     public static LocationFragment newInstance() {
         return new LocationFragment();
@@ -33,14 +34,14 @@ public class LocationFragment extends Fragment {
              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         // inflate the layout and get reference to auto-generated view binding class
-        binding = LocationsBinding.inflate(getLayoutInflater());
+        binding = LocationBinding.inflate(getLayoutInflater());
         View root = binding.getRoot();
         // setContentView(view);
 
         // turn on progress wheel
         binding.progressBar.setVisibility(View.VISIBLE);
 
-        return inflater.inflate(R.layout.locations, container, false);
+        return inflater.inflate(R.layout.location, container, false);
     }
 
     @Override
@@ -52,12 +53,16 @@ public class LocationFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(LocationViewModel.class);
 
         // observe the livedata observable to receive any changes to its data
-        // todo getActivity may return null?
         viewModel.getLocations().observe(getActivity(), new Observer<List<Location>>() {
 
             // called if target livedata observable is non null
             @Override
             public void onChanged(List<Location> locations) {
+
+                if (locations == null) {
+                    Log.e(TAG, "locations null");
+                    return;
+                }
 
                 // turn off the progress wheel
                 binding.progressBar.setVisibility(View.INVISIBLE);
