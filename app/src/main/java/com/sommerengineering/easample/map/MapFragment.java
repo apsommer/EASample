@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.sommerengineering.easample.R;
 
 public class MapFragment extends Fragment {
+
+    final String TAG = getClass().getSimpleName() + " ~~ ";
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
@@ -38,6 +41,8 @@ public class MapFragment extends Fragment {
         }
     };
 
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -51,6 +56,7 @@ public class MapFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        Log.d(TAG, mapFragment.toString());
         if (mapFragment != null) {
             mapFragment.getMapAsync(callback);
         }

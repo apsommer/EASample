@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 // put api token in a local file to keep it out of version control
-def localProperties = new Properties()
-localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+def properties = new Properties()
+properties.load(new FileInputStream(rootProject.file("local.properties")))
 
 android {
     compileSdkVersion 29
@@ -10,6 +10,22 @@ android {
 
     buildFeatures {
         viewBinding true
+    }
+
+    signingConfigs {
+
+        // debug signing configuration is handled by Android Studio
+
+        release {
+
+            // google manages app signing from play store to each device, using a key hidden in their secure infrastructure
+            // developer uploads to the play console must be signed with the certs in keystore.jks (upload key)
+
+            storeFile file("../keystore.jks")
+            storePassword properties['storePassword']
+            keyAlias properties['keyAlias']
+            keyPassword properties['keyPassword']
+        }
     }
 
     defaultConfig {
@@ -22,11 +38,12 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         //
-        buildConfigField "String", "TOKEN", localProperties['token']
+        buildConfigField "String", "TOKEN", properties['token']
     }
 
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
