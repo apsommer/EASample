@@ -49,13 +49,13 @@ public class LoginFragment extends Fragment {
 
             // navigate to location before map
             if (isChecked) {
-                toggle.setHighlightColor(getResources().getColor(R.color.colorAccent));
+                toggle.setTextColor(getResources().getColor(R.color.colorPrimary));
                 button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.location_action));
             }
 
             // navigate directly to map
             else {
-                toggle.setHighlightColor(getResources().getColor(android.R.color.white));
+                toggle.setTextColor(getResources().getColor(android.R.color.black));
                 button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.map_action));
             }
         });
