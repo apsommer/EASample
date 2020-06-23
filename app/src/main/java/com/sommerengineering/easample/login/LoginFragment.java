@@ -43,19 +43,22 @@ public class LoginFragment extends Fragment {
         SwitchCompat toggle = binding.toggle;
         toggle.setOnCheckedChangeListener((view, isChecked) -> {
 
+            // action is path from one dest to another dest as defined in nav graph
             int action;
 
             // navigate to location before map
             if (isChecked) {
                 toggle.setTextColor(getResources().getColor(R.color.colorPrimary));
-                button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.location_action));
+                action = R.id.location_action;
             }
 
             // navigate directly to map
             else {
                 toggle.setTextColor(getResources().getColor(android.R.color.black));
-                button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.map_action));
+                action = R.id.map_action;
             }
+
+            button.setOnClickListener(Navigation.createNavigateOnClickListener(action));
         });
         // todo end FeatureFlag class
 

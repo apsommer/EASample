@@ -34,14 +34,15 @@ public class MapFragment extends Fragment {
          * user has installed Google Play services and returned to the app.
          */
         @Override
-        public void onMapReady(GoogleMap googleMap) {
-            LatLng sydney = new LatLng(-34, 151);
-            googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        public void onMapReady(GoogleMap map) {
+
+            // zoom to San Diego street level
+            LatLng sanDiego = new LatLng(32.72, -117.16);
+            map.addMarker(new MarkerOptions().position(sanDiego).title("Marker in San Diego"));
+            map.moveCamera(CameraUpdateFactory.newLatLng(sanDiego));
+            map.setMinZoomPreference(10.0f);
         }
     };
-
-
 
     @Nullable
     @Override
