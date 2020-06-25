@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
-apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'dagger.hilt.android.plugin' // Hilt
 
-// put api token in a local file to keep it out of version control
+// tokens in a local file to keep it out of version control
 def properties = new Properties()
 properties.load(new FileInputStream(rootProject.file("local.properties")))
 
@@ -9,6 +9,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
 
+    // generate native ViewBinding classes
     buildFeatures {
         viewBinding true
     }
@@ -41,7 +42,6 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
-
 }
 
 dependencies {
