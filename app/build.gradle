@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'dagger.hilt.android.plugin'
 
 // put api token in a local file to keep it out of version control
 def properties = new Properties()
@@ -51,37 +52,37 @@ dependencies {
     // UI
     implementation "androidx.appcompat:appcompat:$appcompat"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
-    implementation "com.google.android.gms:play-services-maps:$play_services_maps"
-    implementation "androidx.legacy:legacy-support-v4:$legacy_support_v4"
+    implementation "com.google.android.gms:play-services-maps:$maps"
+    implementation "androidx.legacy:legacy-support-v4:$legacy_support"
     implementation "com.google.android.material:material:$material"
     implementation "androidx.annotation:annotation:$annotation"
 
     // JUnit
     testImplementation "junit:junit:$junit"
     androidTestImplementation "androidx.test.ext:junit:$androidx_junit"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressor_core"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
 
     // Retrofit2
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
-    implementation "com.squareup.retrofit2:converter-gson:$converter_gson"
+    implementation "com.squareup.retrofit2:converter-gson:$gson"
 
     // LiveData
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_extensions"
-    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_viewmodel"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle"
 
     // navigation
-    implementation "androidx.navigation:navigation-fragment:$navigation_fragment"
-    implementation "androidx.navigation:navigation-ui:$navigation_ui"
+    implementation "androidx.navigation:navigation-fragment:$navigation"
+    implementation "androidx.navigation:navigation-ui:$navigation"
 
     // Hilt
     implementation "com.google.dagger:hilt-android:$hilt_android"
-    annotationProcessor "com.google.dagger:hilt-android-compiler:$hilt_android_compiler"
+    annotationProcessor "com.google.dagger:hilt-android-compiler:$hilt_android"
 
         // instrumentation tests
-        androidTestImplementation  "com.google.dagger:hilt-android-testing:$hilt_android_testing"
-        androidTestAnnotationProcessor "com.google.dagger:hilt-android-compiler:$hilt_android_compiler"
+        androidTestImplementation  "com.google.dagger:hilt-android-testing:$hilt_android"
+        androidTestAnnotationProcessor "com.google.dagger:hilt-android-compiler:$hilt_android"
 
         // unit tests
-        testImplementation "com.google.dagger:hilt-android-testing:$hilt_android_testing"
-        testAnnotationProcessor "com.google.dagger:hilt-android-compiler:$hilt_android_compiler"
+        testImplementation "com.google.dagger:hilt-android-testing:$hilt_android"
+        testAnnotationProcessor "com.google.dagger:hilt-android-compiler:$hilt_android"
 }
