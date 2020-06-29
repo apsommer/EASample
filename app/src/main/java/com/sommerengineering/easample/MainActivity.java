@@ -8,8 +8,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
+import androidx.navigation.NavHostController;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint // create activity level dependency container
 public class MainActivity extends FragmentActivity {
 
     final String TAG = getClass().getSimpleName() + " ~~ ";
@@ -17,17 +24,13 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // layout defines the host fragment
         setContentView(R.layout.navigation);
 
-        NavHostFragment hostFragment = (NavHostFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.host_fragment);
-
-        NavController navController = hostFragment.getNavController();
-        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-            @Override
-            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle args) {
-                Log.d(TAG, "navigated to: " + getResources().getResourceName(destination.getId()));
-            }
-        });
+        // log a message when navigating to new destination
+        Navigation.findNavController(this, R.id.host_fragment).addOnDestinationChangedListener(
+                (controller, destination, args) ->
+                Log.d(TAG, "navigated to: " + getResources().getResourceName(destination.getId())));
     }
 }
