@@ -16,7 +16,7 @@ import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
-@AndroidEntryPoint // create activity level dependency container
+@AndroidEntryPoint // creates activity level dependency container
 public class MainActivity extends FragmentActivity {
 
     final String TAG = getClass().getSimpleName() + " ~~ ";

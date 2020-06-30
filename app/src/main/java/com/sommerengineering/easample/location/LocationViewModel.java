@@ -1,7 +1,10 @@
 package com.sommerengineering.easample.location;
 
+import androidx.hilt.Assisted;
+import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
 
 import com.sommerengineering.easample.location.Location;
@@ -16,12 +19,12 @@ public class LocationViewModel extends ViewModel {
     final String TAG = getClass().getSimpleName() + " ~~ ";
 
     // reference to repo and livedata observable it contains
-    private LocationRepo repository;
+    private LocationRepo repository = new LocationRepo();
     private MutableLiveData<List<Location>> mutableLiveData;
 
     // pass repo in constructor for dependency injection
-    public LocationViewModel() {
-        repository = new LocationRepo();
+    @ViewModelInject LocationViewModel() {
+//        this.repository = repository;
     }
 
     // called by the view to access observable in the repo (abstraction layer)

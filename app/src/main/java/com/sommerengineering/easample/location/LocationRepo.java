@@ -9,6 +9,9 @@ import com.sommerengineering.easample.BuildConfig;
 import java.io.IOException;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import dagger.hilt.EntryPoint;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -19,11 +22,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Repository manages the network API calls and retrieval from db cache. It supplies data to the ViewModel via exposure
  * of a LiveData observable.
  */
+
 public class LocationRepo implements Callback<Root> {
 
     // constants
     final String TAG = getClass().getSimpleName() + " ~~ ";
     final String BASE_URL = "https://api-stage.greenlotstest.com/ocpi/cpo/2.1.1/";
+
+    @Inject LocationRetrofit apiInterface;
 
     // livedata is an observable that automatically respects its observers' lifecycles
     MutableLiveData<List<Location>> mutableLiveData = new MutableLiveData<>();
@@ -34,19 +40,19 @@ public class LocationRepo implements Callback<Root> {
         // todo logic to initialize observable with data from db cache
         //  afterward initialization update cache in background if needed
 
-        // converter between JSON <--> Java POJO
-        Gson gson = new GsonBuilder()
-                .setLenient() // relax the conditions for what the parser considers valid JSON syntax
-                .create();
-
-        // initialize retrofit with the JSON parser and base URL
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
-        // associate the API interface to the Retrofit object
-        LocationRetrofit apiInterface = retrofit.create(LocationRetrofit.class);
+//        // converter between JSON <--> Java POJO
+//        Gson gson = new GsonBuilder()
+//                .setLenient() // relax the conditions for what the parser considers valid JSON syntax
+//                .create();
+//
+//        // initialize retrofit with the JSON parser and base URL
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(BASE_URL)
+//                .addConverterFactory(GsonConverterFactory.create(gson))
+//                .build();
+//
+//        // associate the API interface to the Retrofit object
+//        LocationRetrofit apiInterface = retrofit.create(LocationRetrofit.class);
         Call<Root> call = apiInterface.getLocations("Token " + BuildConfig.TOKEN);
 
         // make the API the call asynchronously

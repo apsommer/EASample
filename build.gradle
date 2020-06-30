@@ -16,6 +16,7 @@ buildscript {
         lifecycle = '2.2.0'
         navigation = '2.2.2'
         hilt_android = '2.28-alpha' // can not use just "hilt" here, causes name conflict
+        hilt_androidx =  '1.0.0-alpha01'
     }
     
     repositories {

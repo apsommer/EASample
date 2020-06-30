@@ -78,6 +78,10 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hilt_android"
     annotationProcessor "com.google.dagger:hilt-android-compiler:$hilt_android"
 
+        // viewmodel integration
+        implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_androidx"
+        annotationProcessor "androidx.hilt:hilt-compiler:$hilt_androidx"
+
         // instrumentation tests
         androidTestImplementation  "com.google.dagger:hilt-android-testing:$hilt_android"
         androidTestAnnotationProcessor "com.google.dagger:hilt-android-compiler:$hilt_android"
