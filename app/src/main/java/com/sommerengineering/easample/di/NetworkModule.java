@@ -27,6 +27,9 @@ public final class NetworkModule {
     // scope annotation does not make sense here because the ViewModelProvider always returns
     // the same instance of viewmodel, it is already activity scoped
     static LocationViewModel provideViewModel(@ActivityContext Context context) {
+
+        // viewmodel instance created only the very first time system calls onCreate
+        // all other instances of activity (orientation change) receive this same viewmodel instance
         return new ViewModelProvider((ViewModelStoreOwner) context).get(LocationViewModel.class);
     }
 

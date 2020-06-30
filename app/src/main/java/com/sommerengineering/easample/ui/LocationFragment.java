@@ -1,7 +1,5 @@
 package com.sommerengineering.easample.ui;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,9 +45,6 @@ public class LocationFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        // viewmodel instance created only the very first time system calls onCreate
-        // all other instances of activity (orientation change) receive this same viewmodel instance
 
         // observe the livedata observable to receive any changes to its data
         // called if target livedata observable is non null
