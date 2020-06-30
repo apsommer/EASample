@@ -1,10 +1,8 @@
-package com.sommerengineering.easample.location;
+package com.sommerengineering.easample.ui;
 
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -12,19 +10,22 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.sommerengineering.easample.R;
 import com.sommerengineering.easample.databinding.LocationBinding;
+import com.sommerengineering.easample.location.Location;
+import com.sommerengineering.easample.location.LocationViewModel;
 
-import java.util.List;
+import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint // generates fragment container
 public class LocationFragment extends Fragment {
 
-    final String TAG = getClass().getSimpleName() + " ~~ ";
-    private LocationViewModel viewModel;
+    // no dependencies (viewmodel provided by framework ViewModelProvider)
+    @Inject LocationViewModel viewModel;
+
+    // framework view binding
     private LocationBinding binding;
 
     @Override
@@ -32,8 +33,7 @@ public class LocationFragment extends Fragment {
              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         // inflate the layout and get reference to auto-generated view binding class
-        LocationBinding binding = LocationBinding.inflate(getLayoutInflater());
-        View root = binding.getRoot();
+        binding = LocationBinding.inflate(getLayoutInflater());
 
         // turn on progress wheel
         binding.progressBar.setVisibility(View.VISIBLE);
@@ -41,7 +41,7 @@ public class LocationFragment extends Fragment {
         // next button navigates to map destination
         binding.nextButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.map_action));
 
-        return root;
+        return binding.getRoot();
     }
 
     @Override
@@ -50,7 +50,6 @@ public class LocationFragment extends Fragment {
 
         // viewmodel instance created only the very first time system calls onCreate
         // all other instances of activity (orientation change) receive this same viewmodel instance
-        viewModel = new ViewModelProvider(this).get(LocationViewModel.class);
 
         // observe the livedata observable to receive any changes to its data
         // called if target livedata observable is non null
@@ -69,5 +68,4 @@ public class LocationFragment extends Fragment {
             binding.textview.setText(output);
         });
     }
-
 }

@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint // creates activity level dependency container
 public class MainActivity extends FragmentActivity {
 
-    final String TAG = getClass().getSimpleName() + " ~~ ";
+    // no dependencies
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,6 +31,6 @@ public class MainActivity extends FragmentActivity {
         // log a message when navigating to new destination
         Navigation.findNavController(this, R.id.host_fragment).addOnDestinationChangedListener(
                 (controller, destination, args) ->
-                Log.d(TAG, "navigated to: " + getResources().getResourceName(destination.getId())));
+                Log.d(EASample.TAG, "navigated to: " + getResources().getResourceName(destination.getId())));
     }
 }

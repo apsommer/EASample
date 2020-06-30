@@ -1,55 +1,50 @@
 package com.sommerengineering.easample.di;
 
+import android.content.Context;
+
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sommerengineering.easample.location.LocationRetrofit;
-
-import java.io.IOException;
-
-import javax.inject.Singleton;
+import com.sommerengineering.easample.location.LocationViewModel;
 
 import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
-import dagger.hilt.android.components.ApplicationComponent;
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Response;
-import retrofit2.Converter;
+import dagger.hilt.android.components.ActivityComponent;
+import dagger.hilt.android.qualifiers.ActivityContext;
+import dagger.hilt.android.scopes.ActivityScoped;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@InstallIn(ApplicationComponent.class)
+@InstallIn(ActivityComponent.class)
 @Module
 public final class NetworkModule {
 
     @Provides
-    static String provideBaseUrl() {
-        return "https://api-stage.greenlotstest.com/ocpi/cpo/2.1.1/";
+    // scope annotation does not make sense here because the ViewModelProvider always returns
+    // the same instance of viewmodel, it is already activity scoped
+    static LocationViewModel provideViewModel(@ActivityContext Context context) {
+        return new ViewModelProvider((ViewModelStoreOwner) context).get(LocationViewModel.class);
     }
 
     @Provides
-    static OkHttpClient provideOkHttpClient() {
-        return new OkHttpClient();
-    }
+    @ActivityScoped
+    static LocationRetrofit provideLocationRetrofit() {
 
-    @Provides
-    static Gson provideGson() {
-        return new GsonBuilder().setLenient().create();
-    }
+        // converter between JSON <--> Java POJO
+        Gson gson = new GsonBuilder()
+                .setLenient() // relax the conditions for what the parser considers valid JSON syntax
+                .create();
 
-    @Provides
-    static Converter.Factory provideGsonConverterFactory(Gson gson) {
-        return GsonConverterFactory.create(gson);
-    }
+        // initialize retrofit with the JSON parser and base URL
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api-stage.greenlotstest.com/ocpi/cpo/2.1.1/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
 
-    @Provides
-    static Retrofit provideRetrofit(String baseUrl, OkHttpClient client, Converter.Factory factory) {
-        return new Retrofit.Builder().baseUrl(baseUrl).client(client).addConverterFactory(factory).build();
-    }
-
-    @Provides
-    static LocationRetrofit provideLocationRetrofit(Retrofit retrofit) {
         return retrofit.create(LocationRetrofit.class);
     }
 }

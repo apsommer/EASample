@@ -9,7 +9,7 @@
     <!-- login is host fragment -->
     <fragment
         android:id="@+id/login_dest"
-        android:name="com.sommerengineering.easample.login.LoginFragment"
+        android:name="com.sommerengineering.easample.ui.LoginFragment"
         android:label="Login"
         tools:layout="@layout/login" >
 
@@ -25,14 +25,14 @@
     <!-- map -->
     <fragment
         android:id="@+id/map_dest"
-        android:name="com.sommerengineering.easample.map.MapFragment"
+        android:name="com.sommerengineering.easample.ui.MapFragment"
         android:label="Home"
         tools:layout="@layout/map" />
 
     <!-- location -->
     <fragment
         android:id="@+id/location_dest"
-        android:name="com.sommerengineering.easample.location.LocationFragment"
+        android:name="com.sommerengineering.easample.ui.LocationFragment"
         android:label="Location"
         tools:layout="@layout/location" >
 
