@@ -29,8 +29,8 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.navigation);
 
         // log a message when navigating to new destination
-        Navigation.findNavController(this, R.id.host_fragment).addOnDestinationChangedListener(
-                (controller, destination, args) ->
+        Navigation.findNavController(this, R.id.host_fragment)
+                .addOnDestinationChangedListener((controller, destination, args) ->
                 Log.d(EASample.TAG, "navigated to: " + getResources().getResourceName(destination.getId())));
     }
 }

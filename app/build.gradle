@@ -72,6 +72,9 @@ dependencies {
         // androidTestImplementation "androidx.test.ext:junit:$androidx_junit"
         // androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
 
+    // Mockito
+    testImplementation "org.mockito:mockito-core:3.3.3"
+
     // Retrofit2
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
     implementation "com.squareup.retrofit2:converter-gson:$gson"
