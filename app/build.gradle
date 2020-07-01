@@ -6,6 +6,7 @@ def properties = new Properties()
 properties.load(new FileInputStream(rootProject.file("local.properties")))
 
 android {
+
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
 
@@ -42,6 +43,11 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
+
+    // AndroidX support for JUnit tests
+    useLibrary 'android.test.runner' // Gradle automatically adds this, fine to be explicit
+    useLibrary 'android.test.base'
+    // useLibrary 'android.test.mock'
 }
 
 dependencies {
@@ -52,15 +58,19 @@ dependencies {
     // UI
     implementation "androidx.appcompat:appcompat:$appcompat"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
-    implementation "com.google.android.gms:play-services-maps:$maps"
     implementation "androidx.legacy:legacy-support-v4:$legacy_support"
-    implementation "com.google.android.material:material:$material"
     implementation "androidx.annotation:annotation:$annotation"
+    implementation "com.google.android.material:material:$material"
 
-    // JUnit
+    // Google Maps API
+    implementation "com.google.android.gms:play-services-maps:$maps"
+
+    // JUnit unit tests
     testImplementation "junit:junit:$junit"
-    androidTestImplementation "androidx.test.ext:junit:$androidx_junit"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
+
+        // JUnit instrumentation tests
+        // androidTestImplementation "androidx.test.ext:junit:$androidx_junit"
+        // androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
 
     // Retrofit2
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
@@ -70,23 +80,24 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle"
 
-    // navigation
+    // Navigation
     implementation "androidx.navigation:navigation-fragment:$navigation"
     implementation "androidx.navigation:navigation-ui:$navigation"
 
-    // Hilt
+    // Hilt core
     implementation "com.google.dagger:hilt-android:$hilt_android"
     annotationProcessor "com.google.dagger:hilt-android-compiler:$hilt_android"
 
-        // viewmodel integration
-        implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_androidx"
-        annotationProcessor "androidx.hilt:hilt-compiler:$hilt_androidx"
+    // Hilt viewmodel
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_androidx"
+    annotationProcessor "androidx.hilt:hilt-compiler:$hilt_androidx"
 
-        // instrumentation tests
-        androidTestImplementation  "com.google.dagger:hilt-android-testing:$hilt_android"
-        androidTestAnnotationProcessor "com.google.dagger:hilt-android-compiler:$hilt_android"
+        // Hilt roboelectric tests
+        // testImplementation "com.google.dagger:hilt-android-testing:$hilt_android"
+        // testAnnotationProcessor "com.google.dagger:hilt-android-compiler:$hilt_android"
 
-        // unit tests
-        testImplementation "com.google.dagger:hilt-android-testing:$hilt_android"
-        testAnnotationProcessor "com.google.dagger:hilt-android-compiler:$hilt_android"
+        // Hilt instrumentation tests
+        // androidTestImplementation  "com.google.dagger:hilt-android-testing:$hilt_android"
+        // androidTestAnnotationProcessor "com.google.dagger:hilt-android-compiler:$hilt_android"
+
 }
