@@ -1,5 +1,7 @@
 package com.sommerengineering.easample.location;
 
+import com.sommerengineering.easample.location.model.Root;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;

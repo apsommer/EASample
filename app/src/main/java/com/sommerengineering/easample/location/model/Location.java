@@ -1,4 +1,4 @@
-package com.sommerengineering.easample.location;
+package com.sommerengineering.easample.location.model;
 
 import com.google.gson.annotations.SerializedName;
 import java.util.List;

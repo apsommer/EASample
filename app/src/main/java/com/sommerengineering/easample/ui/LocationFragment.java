@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.sommerengineering.easample.R;
 import com.sommerengineering.easample.databinding.LocationBinding;
-import com.sommerengineering.easample.location.Location;
+import com.sommerengineering.easample.location.model.Location;
 import com.sommerengineering.easample.location.LocationViewModel;
 
 import javax.inject.Inject;

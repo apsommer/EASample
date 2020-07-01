@@ -1,4 +1,4 @@
-package com.sommerengineering.easample.di;
+package com.sommerengineering.easample;
 
 import com.sommerengineering.easample.R;
 

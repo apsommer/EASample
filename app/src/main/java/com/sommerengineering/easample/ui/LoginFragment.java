@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.sommerengineering.easample.R;
 import com.sommerengineering.easample.databinding.LoginBinding;
-import com.sommerengineering.easample.di.FeatureFlag;
+import com.sommerengineering.easample.FeatureFlag;
 
 import javax.inject.Inject;
 

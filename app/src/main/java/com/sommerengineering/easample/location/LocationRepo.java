@@ -4,6 +4,8 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 import com.sommerengineering.easample.BuildConfig;
 import com.sommerengineering.easample.EASample;
+import com.sommerengineering.easample.location.model.Location;
+import com.sommerengineering.easample.location.model.Root;
 
 import java.io.IOException;
 import java.util.List;

@@ -21,9 +21,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @InstallIn(ActivityComponent.class)
 @Module
-public final class NetworkModule {
+public final class Network {
 
     @Provides
+    // @ActivityScoped
     // scope annotation does not make sense here because the ViewModelProvider always returns
     // the same instance of viewmodel, it is already activity scoped
     static LocationViewModel provideViewModel(@ActivityContext Context context) {
