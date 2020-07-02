@@ -14,14 +14,16 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.android.components.ActivityComponent;
+import dagger.hilt.android.components.FragmentComponent;
 import dagger.hilt.android.qualifiers.ActivityContext;
 import dagger.hilt.android.scopes.ActivityScoped;
+import dagger.hilt.android.scopes.FragmentScoped;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @InstallIn(ActivityComponent.class)
 @Module
-public final class Network {
+public final class LocationContainer {
 
     @Provides
     // @ActivityScoped
@@ -35,7 +37,6 @@ public final class Network {
     }
 
     @Provides
-    @ActivityScoped
     static LocationRetrofit provideLocationRetrofit() {
 
         // converter between JSON <--> Java POJO

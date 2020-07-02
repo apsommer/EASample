@@ -24,8 +24,15 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class MapFragment extends Fragment {
 
-    // dependency
-    @Inject OnMapReadyCallback callback;
+    // map callback
+    private OnMapReadyCallback callback = map -> {
+
+        // todo this should be user current location
+        LatLng sanDiego = new LatLng(32.72, -117.16);
+        map.addMarker(new MarkerOptions().position(sanDiego).title("Marker in San Diego"));
+        map.moveCamera(CameraUpdateFactory.newLatLng(sanDiego));
+        map.setMinZoomPreference(10.0f);
+    };
 
     @Nullable
     @Override

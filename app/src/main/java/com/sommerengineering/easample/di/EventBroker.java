@@ -1,5 +1,8 @@
 package com.sommerengineering.easample.di;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 
 import androidx.navigation.Navigation;
@@ -17,24 +20,14 @@ import dagger.hilt.android.components.FragmentComponent;
 import dagger.hilt.android.scopes.ActivityScoped;
 import dagger.hilt.android.scopes.FragmentScoped;
 
+/**
+ * This class acts receiver and broadcaster for app-level events. Disparate features of the app may communicate
+ * with one another through this mechanism.
+ */
 @InstallIn(ActivityComponent.class)
 @Module
 public final class EventBroker {
 
-    // todo this does not keep the map in memory? still seeing map refresh
-    @Provides
-    @ActivityScoped
-    static OnMapReadyCallback provideMapCallback() {
-
-        return map -> {
-
-            // todo this should be user current location
-            LatLng sanDiego = new LatLng(32.72, -117.16);
-            map.addMarker(new MarkerOptions().position(sanDiego).title("Marker in San Diego"));
-            map.moveCamera(CameraUpdateFactory.newLatLng(sanDiego));
-            map.setMinZoomPreference(10.0f);
-        };
-    }
-
+    // list of livedata observables to which observers may subscribe
 
 }
