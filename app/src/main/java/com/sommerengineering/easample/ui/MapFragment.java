@@ -34,7 +34,7 @@ public class MapFragment extends Fragment implements MapInterface {
     // map callback
     private OnMapReadyCallback callback = map -> {
 
-        // todo will be current location
+        // todo should be current location
         LatLng sanDiego = new LatLng(32.72, -117.16);
         map.addMarker(new MarkerOptions().position(sanDiego).title("Marker in San Diego"));
         map.moveCamera(CameraUpdateFactory.newLatLng(sanDiego));
@@ -54,7 +54,6 @@ public class MapFragment extends Fragment implements MapInterface {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) mapFragment.getMapAsync(callback);
     }
