@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,18 +17,24 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.sommerengineering.easample.R;
+import com.sommerengineering.easample.map.MapInterface;
 
 import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class MapFragment extends Fragment {
+public class MapFragment extends Fragment implements MapInterface {
+
+    @Override
+    public int getMapType() {
+        return 42;
+    }
 
     // map callback
     private OnMapReadyCallback callback = map -> {
 
-        // todo this should be user current location
+        // todo will be current location
         LatLng sanDiego = new LatLng(32.72, -117.16);
         map.addMarker(new MarkerOptions().position(sanDiego).title("Marker in San Diego"));
         map.moveCamera(CameraUpdateFactory.newLatLng(sanDiego));
