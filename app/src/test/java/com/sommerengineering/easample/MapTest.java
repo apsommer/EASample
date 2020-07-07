@@ -1,35 +1,34 @@
 package com.sommerengineering.easample;
 
-import android.util.Log;
-
-import androidx.fragment.app.Fragment;
-import androidx.hilt.Assisted;
-
-import com.sommerengineering.easample.map.MapInterface;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.internal.IGoogleMapDelegate;
+import com.google.android.gms.maps.model.LatLng;
+import com.sommerengineering.easample.map.MapCallback;
+import com.sommerengineering.easample.map.MapCollaborator;
 import com.sommerengineering.easample.ui.MapFragment;
 
-import org.hamcrest.CoreMatchers;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.MockitoRule;
-import org.mockito.stubbing.OngoingStubbing;
 
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.timeout;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MapTest {
@@ -38,21 +37,25 @@ public class MapTest {
     @Before public void prepare() { MockitoAnnotations.initMocks(this); }
     @Rule public MockitoRule rule = MockitoJUnit.rule();
 
-    // create a mock map interface for use with @Test when/then pattern
-    @Mock
-    MapInterface mockMap;
-
-    // create vanilla, new default instance of map fragment
+    // CUT = class under test
     @InjectMocks
-    MapFragment realMap;
+    MapFragment mapFragment;
+
+    @Mock
+    MapCollaborator mockCollaborator;
+
+    @Mock
+    GoogleMap googleMap;
+
+    @Captor
+    ArgumentCaptor<MapCallback> callbackArgumentCaptor;
+
+    // @Spy is rarely used relative to mock ... useful for legacy code.
 
     @Test
     public void someTest() {
 
-        // when "this method is called on mock" then "return this value"
-        when(mockMap.getMapType()).thenReturn(42);
+        mapFragment.delegate();
 
-        // very the real map interface matches the mocked response
-        Assert.assertEquals(realMap.getMapType(), mockMap.getMapType());
     }
 }

@@ -4,42 +4,46 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.sommerengineering.easample.R;
-import com.sommerengineering.easample.map.MapInterface;
-
-import javax.inject.Inject;
+import com.sommerengineering.easample.map.MapCollaborator;
+import com.sommerengineering.easample.map.MapCallback;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
+import static com.sommerengineering.easample.EASample.TAG;
+
 @AndroidEntryPoint
-public class MapFragment extends Fragment implements MapInterface {
+public class MapFragment extends Fragment implements MapCallback {
+
+    SupportMapFragment mapFragment;
+    MapCollaborator mapCollaborator;
+    GoogleMap googleMap;
 
     @Override
-    public int getMapType() {
-        return 42;
+    public void onSuccess(GoogleMap googleMap) {
+        this.googleMap = googleMap;
+        Log.e(TAG, "onSuccess");
     }
 
-    // map callback
-    private OnMapReadyCallback callback = map -> {
+    @Override
+    public void onFail(int code) {
+        Log.e(TAG, "onFail");
+    }
 
-        // todo should be current location
-        LatLng sanDiego = new LatLng(32.72, -117.16);
-        map.addMarker(new MarkerOptions().position(sanDiego).title("Marker in San Diego"));
-        map.moveCamera(CameraUpdateFactory.newLatLng(sanDiego));
-        map.setMinZoomPreference(10.0f);
-    };
+    public void delegate() {
+        mapCollaborator.executeAsyncMap(mapFragment, this);
+    }
 
     @Nullable
     @Override
@@ -54,7 +58,13 @@ public class MapFragment extends Fragment implements MapInterface {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-        if (mapFragment != null) mapFragment.getMapAsync(callback);
+
+        mapCollaborator = new MapCollaborator();
+
+        // get reference to pre-defined map fragment via its layout
+        mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        if (mapFragment == null) return;
+
+        delegate();
     }
 }
