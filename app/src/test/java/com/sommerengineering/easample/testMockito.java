@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MockitoTest {
+public class testMockito {
 
     @Mock // creates a List class for testing
     private List list;

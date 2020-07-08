@@ -14,7 +14,7 @@ import static org.mockito.Mockito.when;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
-public class MockitoDefaultTest {
+public class testDefaultMockito {
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();

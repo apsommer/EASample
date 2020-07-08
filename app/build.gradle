@@ -94,10 +94,11 @@ dependencies {
     // Hilt viewmodel
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_androidx"
     annotationProcessor "androidx.hilt:hilt-compiler:$hilt_androidx"
+    testAnnotationProcessor "androidx.hilt:hilt-compiler:$hilt_androidx" // req'd for roboelectric
 
         // Hilt roboelectric tests
-        // testImplementation "com.google.dagger:hilt-android-testing:$hilt_android"
-        // testAnnotationProcessor "com.google.dagger:hilt-android-compiler:$hilt_android"
+         testImplementation "com.google.dagger:hilt-android-testing:$hilt_android"
+         testAnnotationProcessor "com.google.dagger:hilt-android-compiler:$hilt_android"
 
         // Hilt instrumentation tests
         // androidTestImplementation  "com.google.dagger:hilt-android-testing:$hilt_android"
