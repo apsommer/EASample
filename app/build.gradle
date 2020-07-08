@@ -30,6 +30,18 @@ android {
     //  dimension = "greenlots"
     //  dimension = "sulzer-us"
 
+    // use hilt in roboelectric tests
+    hilt {
+        enableTransformForLocalTests = true
+    }
+
+    // roboelectric tests require access to R.* resources
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
     buildTypes {
         release {
             // signingConfig signingConfigs.release
@@ -94,7 +106,7 @@ dependencies {
     // Hilt viewmodel
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_androidx"
     annotationProcessor "androidx.hilt:hilt-compiler:$hilt_androidx"
-    testAnnotationProcessor "androidx.hilt:hilt-compiler:$hilt_androidx" // req'd for roboelectric
+    testAnnotationProcessor "androidx.hilt:hilt-compiler:$hilt_androidx" // req'd for viewmodel used in roboelectric
 
         // Hilt roboelectric tests
          testImplementation "com.google.dagger:hilt-android-testing:$hilt_android"
@@ -104,4 +116,6 @@ dependencies {
         // androidTestImplementation  "com.google.dagger:hilt-android-testing:$hilt_android"
         // androidTestAnnotationProcessor "com.google.dagger:hilt-android-compiler:$hilt_android"
 
+    // Roboelectric tests
+    testImplementation "org.robolectric:robolectric:4.3"
 }
