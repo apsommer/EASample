@@ -26,22 +26,6 @@ android {
         resValue "string", "MAP_KEY", properties['mapKey'] // XML accessible
     }
 
-    // todo add whitelabel "flavor" dimensions here .. for example a set of unique backend endpoints
-    //  dimension = "greenlots"
-    //  dimension = "sulzer-us"
-
-    // use hilt in roboelectric tests
-    hilt {
-        enableTransformForLocalTests = true
-    }
-
-    // roboelectric tests require access to R.* resources
-    testOptions {
-        unitTests {
-            includeAndroidResources = true
-        }
-    }
-
     buildTypes {
         release {
             // signingConfig signingConfigs.release
@@ -56,10 +40,25 @@ android {
         targetCompatibility = 1.8
     }
 
+    // todo add whitelabel "flavor" dimensions here .. for example a set of unique backend endpoints
+    //  dimension = "greenlots"
+    //  dimension = "sulzer-us"
+
     // AndroidX support for JUnit tests
     useLibrary 'android.test.runner' // Gradle automatically adds this, fine to be explicit
     useLibrary 'android.test.base'
     // useLibrary 'android.test.mock'
+
+    // roboelectric tests require access to R.* resources
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+    // use hilt in roboelectric tests
+    hilt {
+        enableTransformForLocalTests = true
+    }
 }
 
 dependencies {
