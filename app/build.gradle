@@ -55,7 +55,7 @@ android {
             includeAndroidResources = true
         }
     }
-    // use hilt in roboelectric tests
+    // use hilt in local roboelectric tests
     hilt {
         enableTransformForLocalTests = true
     }
@@ -116,5 +116,11 @@ dependencies {
         // androidTestAnnotationProcessor "com.google.dagger:hilt-android-compiler:$hilt_android"
 
     // Roboelectric tests
-    testImplementation "org.robolectric:robolectric:4.3"
+    testImplementation "org.robolectric:robolectric:4.3.1"
+
+    // test fragments in isolation
+    debugImplementation "androidx.fragment:fragment-testing:1.2.5"
+
+    testImplementation "org.hamcrest:hamcrest-all:1.3"
+
 }

@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,26 +18,33 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.sommerengineering.easample.R;
 import com.sommerengineering.easample.map.MapInterface;
 
-import javax.inject.Inject;
-
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class MapFragment extends Fragment implements MapInterface {
 
+    GoogleMap map;
+
+    SupportMapFragment mapFragment;
+
     @Override
     public int getMapType() {
-        return 42;
+
+        if (map == null) return 42;
+        return map.getMapType();
     }
 
     // map callback
-    private OnMapReadyCallback callback = map -> {
+    private OnMapReadyCallback callback = googleMap -> {
 
-        // todo should be current location
+        this.map = googleMap;
+
+        // center map on San Diego
         LatLng sanDiego = new LatLng(32.72, -117.16);
         map.addMarker(new MarkerOptions().position(sanDiego).title("Marker in San Diego"));
         map.moveCamera(CameraUpdateFactory.newLatLng(sanDiego));
         map.setMinZoomPreference(10.0f);
+
     };
 
     @Nullable
@@ -54,7 +60,19 @@ public class MapFragment extends Fragment implements MapInterface {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-        if (mapFragment != null) mapFragment.getMapAsync(callback);
+        mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        if (mapFragment != null) executeAsync();
+    }
+
+    public void executeAsync() {
+        mapFragment.getMapAsync(callback);
+    }
+
+    public SupportMapFragment getMapFragment() {
+        return mapFragment;
+    }
+
+    public GoogleMap getMap() {
+        return map;
     }
 }
