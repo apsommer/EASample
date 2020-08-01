@@ -21,7 +21,7 @@ import retrofit2.Response;
  * of a LiveData observable.
  */
 
-public class LocationRepo implements Callback<Root> {
+public class LocationRepo {
 
     // dependency
     LocationRetrofit apiInterface;
@@ -35,42 +35,42 @@ public class LocationRepo implements Callback<Root> {
     // viewmodel requests formatted POJO's
     public MutableLiveData<List<Location>> requestLocations() {
 
-        // todo logic to initialize observable with data from db cache
-        //  afterward initialization update cache in background if needed
+        // make the API the call asynchronously with enqueue()
+        apiInterface.getLocations("Token " + BuildConfig.TOKEN)
+                .enqueue(new Callback<Root>() {
 
-        // make the API the call asynchronously
-        apiInterface.getLocations("Token " + BuildConfig.TOKEN).enqueue(this);
+                    // callback triggered on API response
+                    @Override
+                    public void onResponse(Call<Root> call, Response<Root> response) {
+
+                        // success
+                        if (response.isSuccessful()) {
+
+                            // response body holds the converted POJO
+                            Root model = response.body();
+
+                            // update observable on main thread with setValue()
+                            mutableLiveData.setValue(model.getLocations());
+
+                        // failure, the response finished but has an error
+                        } else {
+                            try {
+                                Log.e(EASample.TAG, "onResponse > " + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    // failure, the response was interrupted by an error
+                    @Override
+                    public void onFailure(Call<Root> call, Throwable t) {
+                        Log.e(EASample.TAG, "onFailure > " + t.getMessage());
+                    }
+                }
+        );
 
         // return the observable (empty until async call finishes)
         return mutableLiveData;
-    }
-
-    // callback triggered on API response
-    @Override
-    public void onResponse(Call<Root> call, Response<Root> response) {
-
-        // success
-        if (response.isSuccessful()) {
-
-            // response body holds the converted POJO
-            Root model = response.body();
-
-            // assign the list of location to the observable
-            mutableLiveData.setValue(model.getLocations());
-
-        // failure, the response finished but has an error
-        } else {
-            try {
-                Log.e(EASample.TAG, "onResponse > " + response.errorBody().string());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    // failure, the response was interrupted by an error
-    @Override
-    public void onFailure(Call<Root> call, Throwable t) {
-        Log.e(EASample.TAG, "onFailure > " + t.getMessage());
     }
 }
